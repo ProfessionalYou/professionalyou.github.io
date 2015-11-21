@@ -2,8 +2,8 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <!--
 author: Eric Brooke
-date: 19 July 2011
-editor: BBedit Mac OS X
+date: 20 Nov 2015
+editor: Atom
 browsers tested in: Firefox, Safari, Chrome on Mac OS X
 -->
 
@@ -15,7 +15,7 @@ browsers tested in: Firefox, Safari, Chrome on Mac OS X
   	<link rel="icon" type="image/x-icon" href="images/favicon.ico" />
   	<link rel="shortcut icon" type="image/x-icon" href="images/favicon.ico" />
 
-	<meta name="Generator" content="BBedit" />
+	<meta name="Generator" content="Atom" />
   	<meta name="Author" content="Eric Brooke" />
   	<meta name="Keywords" content="Professional, recruitment, career, talent, management, leadership" />
   	<meta name="Description" content="We will replace the resume with a highly visual career portfolio, which will be supported by personality matching software. This, we believe will change the way we find a future boss or an employee. Professional You is an online career management platform, which will go deeper than just job titles it will look at your work." />
@@ -35,83 +35,9 @@ browsers tested in: Firefox, Safari, Chrome on Mac OS X
   		})();
 
 	</script>
-
-	<script type="text/javascript">
-
-		/***********************************************
-		* Email Validation script- � Dynamic Drive (www.dynamicdrive.com)
-		* This notice must stay intact for legal use.
-		* Visit http://www.dynamicdrive.com/ for full source code
-		***********************************************/
-		<!-- <![CDATA[
-		var emailfilter=/^\w+[\+\.\w-]*@([\w-]+\.)*\w+[\w-]*\.([a-z]{2,4}|\d+)$/i
-
-		function checkmail(e){
-			var returnval=emailfilter.test(e.value)
-			if (returnval==false){
-			alert("Please enter a valid email address.")
-			e.select()
-			}
-		return returnval
-		}
-		// ]]> -->
-
-	</script>
-
-	<script type="text/javascript">
-
-      function validateRegEx(regex, input, helpText, helpMessage) {
-        // See if the input data validates OK
-        if (!regex.test(input)) {
-          // The data is invalid, so set the help message and return false
-          if (helpText != null)
-            helpText.innerHTML = helpMessage;
-          return false;
-        }
-        else {
-          // The data is OK, so clear the help message and return true
-          if (helpText != null)
-            helpText.innerHTML = "";
-          return true;
-        }
-      }
-
-      function validateNonEmpty(inputField, helpText) {
-        // See if the input value contains any text
-        return validateRegEx(/.+/,
-          inputField.value, helpText,
-          "Please enter a value.");
-    }
-
-      function validateEmail(inputField, helpText) {
-        // First see if the input value contains data
-        if (!validateNonEmpty(inputField, helpText))
-          return false;
-
-        // Then see if the input value is an email address
-        return validateRegEx(/^[\w\.-_\+]+@[\w-]+(\.\w{2,3})+$/,
-          inputField.value, helpText,
-          "Please enter an email address (for example, johndoe@acme.com).");
-      }
-
-      function placeOrder(form) {
-        if (validateNonEmpty(form["firstname"], form["firstname_help"]) &&
-        validateNonEmpty(form["lastname"], form["lastname_help"]) &&
-        validateNonEmpty(form["why"], form["why_help"]) &&
-          validateEmail(form["email"], form["email_help"])) {
-          // Submit the order to the server
-          form.submit();
-        } else {
-          alert("I'm sorry but there is something wrong with the order information.");
-        }
-      }
-
-    </script>
  </head>
 
  	<body>
-
-
 
  	<div id="wrapper">
 
@@ -151,99 +77,6 @@ browsers tested in: Firefox, Safari, Chrome on Mac OS X
 			<p>Unlike other services and systems that try to solve the organisation&apos;s needs first, we have started from the other side of the equation  by prioritizing the needs of the <span class="greenbold">Professional</span>(i.e. <span class="grassbold">You</span>).<br/><br /></p>
 
 		</div> <!-- End of Content-->
-
-		<?php
-
-			require_once('connectvars.php');
-
-			if (isset($_POST['submit'])) {
-
-				$firstname = $_POST['firstname'];
-				$lastname = $_POST['lastname'];
-				$email = $_POST['email'];
-				$interest = $_POST['interest'];
-				$to = 'eric@professionalyou.net';
-				$subject = 'New person interested in Professional You';
-				$output_form = false;
-
-				if (empty($firstname) && empty($lastname)) {
-				echo 'You forget your full name.<br />';
-				$output_form = true;
-				}
-
-				if (empty($email))  {
-				echo 'You forget your email.<br />';
-				$output_form = true;
-				}
-
-				if (empty($interest)) {
-				echo 'You forget why we should keep you informed.<br />';
-				$output_form = true;
-				}
-
-				if ((!empty($firstname)) && (!empty($lastname)) && (!empty($email)) && (!empty($why))) {
-
-					$msg= "$firstname \n" ."$lastname \n" . "$email\n" . "$interest\n";
-					mail($to, $subject, $msg, 'From:' . $email);
-
-					echo $firstname . ' we will use your email responsibly' . '<br /><br />';
-					echo '<a href="http://www.professionalyou.com">Return to homepage</a>';
-
-					$dbc = mysqli_connect('DB_HOST', 'DB_USER', 'DB_GATE', 'DB_NAME')
-					or die('Error in Connecting to MySQL server.');
-
-					$query = "INSERT INTO websiteEmails (firstname, lastname, email, interest, approved) VALUES ('$firstname', '$lastname', '$email', '$interest', 0)";
-
-					$result = mysqli_query($dbc, $query) or die('Error querying database.');
-
-					mysqli_close($dbc);
-				}
-
-			else {
-				$output_form = true;
-				}
-
-			if ($output_form) {
-
-		?>
-
-			<!--Email form to collect emails, uses table and javascript to check email is valid-->
-			<form method="post" action="<?php echo $_SERVER['PHP_SELF']; ?>">
-			<table id="emailform">
-				<tr>
-					<td colspan="2" class="whitebold">This sounds interesting. Please keep me informed:</td>
-				</tr>
-				<tr>
-					<td ><label for="firstname">First name: </label></td>
-					<td ><input type="text" size="50" name="firstname" id="firstname" value="<?php echo $firstname; ?>" onblur="validateNonEmpty(this, document.getElementById('firstname_help'))""/>
-					<span id="first_help" class="help"></span></td>
-				</tr>
-				<tr>
-					<td ><label for="lastname">Last name: </label></td>
-					<td ><input type="text" size="50" name="lastname" id="lastname" value="<?php echo $lastname; ?>" onblur="validateNonEmpty(this, document.getElementById('lastname_help'))""/>
-					<span id="lastname_help" class="help"></span></td>
-				</tr>
-				<tr>
-					<td ><label for="email">Email: </label></td>
-					<td><input type="text" size="50" name="email" id="email" value="<?php echo $email; ?>" onblur="validateEmail(this, document.getElementById('email_help'))"/>
-					<span id="email_help" class="help"></span></td>
-				</tr>
-				<tr>
-					<td colspan="2"><label for="interest">Why are you interested? </label><br />
-					<textarea rows="2" cols="46" name="interest" id="interest" value="<?php echo $interest; ?>" onblur="validateNonEmpty(this, document.getElementById('why_help'))" />
-					<span id="interest_help" class="help"></span></textarea></td>
-				</tr>
-				<tr>
-					<td></td>
-					<td colspan="2" align="right"><input type="submit" onclick="return checkmail(this.form.email)" value="submit" /></td>
-				</tr>
-			</table>
-
-		</form>
-
-	<?php
-		}
-	?>
 
 	<div id="footer">
 			<p>&copy; Copyright Professional You Inc. 2008-2016.  All rights reserved.</p>
