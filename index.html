@@ -27,12 +27,30 @@
 
  	<body>
 
+    <script>
+    window.fbAsyncInit = function() {
+      FB.init({
+        appId      : '929837760425680',
+        xfbml      : true,
+        version    : 'v2.5'
+      });
+    };
+
+    (function(d, s, id){
+       var js, fjs = d.getElementsByTagName(s)[0];
+       if (d.getElementById(id)) {return;}
+       js = d.createElement(s); js.id = id;
+       js.src = "//connect.facebook.net/en_US/sdk.js";
+       fjs.parentNode.insertBefore(js, fjs);
+     }(document, 'script', 'facebook-jssdk'));
+  </script>
+
  	<div id="wrapper">
 
  	<!--Banner-->
-  <header>
- 		<img  id="banner" src="images/pybanner.png" width="321" height="90" alt="Professional You banner" />
-  </header>
+    <header>
+   		<img  id="banner" src="images/pybanner.png" width="321" height="90" alt="Professional You banner" />
+    </header>
 
 	<!--Website menu-->
 
@@ -61,27 +79,27 @@
 			<p>Unlike other services and systems that try to solve the organisation&apos;s needs first, we have started from the other side of the equation  by prioritizing the needs of the <span class="greenbold">Professional</span>(i.e. <span class="grassbold">You</span>).<br/><br /></p>
 		</div> <!-- End of Content-->
 
+    <!-- Google + -->
+    <g:plusone size="small"></g:plusone>
+    <script type="text/javascript">
+      window.___gcfg = {lang: 'en-GB'};
+      (function() {
+        var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+        po.src = 'https://apis.google.com/js/plusone.js';
+          var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+     }	)();
+    </script>
+
     <!--Linkedin-->
 		<script src="http://platform.linkedin.com/in.js" type="text/javascript"></script>
 		<script type="IN/Share" data-url="http://www.professionalyou.com/index.html" data-counter="right"></script>
-
-		<!-- Google + -->
-		<g:plusone size="small"></g:plusone>
-		<script type="text/javascript">
- 		 	window.___gcfg = {lang: 'en-GB'};
-			(function() {
-   		 	var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
-   		 	po.src = 'https://apis.google.com/js/plusone.js';
-  		  	var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
- 		 }	)();
-		</script>
 
 		<!-- Twitter-->
     <a href="https://twitter.com/share" class="twitter-share-button"{count} data-url="http://www.professionalyou.com" data-text="The Future of Career Management" data-via="professionalyou">Tweet</a>
     <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
 
     <!-- Facebook -->
-    <div class="fb-like" data-href="http://www.professionalyou.com/index.html" data-send="true" data-width="450" data-show-faces="true"></div>
+    <div class="fb-like" data-share="true" data-width="450" data-show-faces="true"></div>
 
 	<footer>
 			<p>&copy; Copyright Professional You Inc. 2008-2016.  All rights reserved.</p>
